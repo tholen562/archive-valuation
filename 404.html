@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to Archive Valuation Calculator...</title>
+  <script src="domain-router-and-analytics.js"></script>
+  <script>
+    (function() {
+      var host = (window.location.hostname || "").replace(/^www\./, "").toLowerCase();
+      var path = window.location.pathname || "/";
+      var search = window.location.search || "";
+      var base = window.location.pathname.indexOf("/archive-valuation") === 0 ? "/archive-valuation" : "";
+      var target = base + "/index.html";
+      if (host.indexOf("fabfabbers") !== -1 || path.toLowerCase().indexOf("openscad") !== -1) {
+        target = base + "/cad-bim-engineering.html?utm_source=fabfabbers.com&utm_medium=expired_domain&orig_path=" + encodeURIComponent(path);
+      } else if (host.indexOf("cncframework") !== -1 || host.indexOf("pythonsandbox") !== -1) {
+        target = base + "/startup-archives.html?utm_source=" + encodeURIComponent(host || "cncframework.com") + "&utm_medium=expired_domain&orig_path=" + encodeURIComponent(path);
+      } else if (search) {
+        target = base + "/index.html" + search + "&orig_path=" + encodeURIComponent(path);
+      }
+      window.location.replace(target);
+    })();
+  </script>
+</head>
+<body style="background:#0a0e17;color:#f8fafc;font-family:system-ui,sans-serif;padding:40px;text-align:center;">
+  <p>Redirecting to the Archive Valuation Calculator &amp; Eligibility Audit...</p>
+</body>
+</html>
