@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Turn Your Accounting Firm’s SOPs, Blank Workpapers & Bookkeeping  | ArchiveValue</title>
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #131a27;
+      --card-alt: #182132;
+      --border: #26334d;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 64px;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(19, 26, 39, 0.92);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 68px;
+      padding: 10px 0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #fff;
+      background: rgba(56, 189, 248, 0.14);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+    .badge {
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+    .badge-guarantee {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .hero {
+      padding: 36px 0 30px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.35rem;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      margin: 14px auto 14px;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 780px;
+      margin: 0 auto 24px;
+    }
+    .guarantee-banner {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12));
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      border-radius: 12px;
+      padding: 16px 22px;
+      max-width: 960px;
+      margin: 0 auto 32px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: left;
+    }
+    .stat-val {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .stat-lbl {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .grid-main {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .grid-main { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.85rem; }
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .panel h2 {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+    .panel p.sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    .field {
+      margin-bottom: 18px;
+    }
+    .field label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .field select, .field input[type="text"], .field input[type="email"] {
+      width: 100%;
+      padding: 10px 12px;
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .field input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .check-item {
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .result-box {
+      background: linear-gradient(145deg, #132238, #0f172a);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+    .result-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .result-number {
+      font-size: 2.15rem;
+      font-weight: 800;
+      margin: 6px 0 4px;
+      color: #fff;
+    }
+    .result-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .breakdown {
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      display: grid;
+      gap: 9px;
+      font-size: 0.87rem;
+    }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--emerald);
+      color: #06281e;
+      font-weight: 800;
+      font-size: 0.96rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.92; }
+    .btn-secondary {
+      display: inline-block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 11px 16px;
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .code-box {
+      background: #090d14;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.81rem;
+      color: #cbd5e1;
+      overflow-x: auto;
+      margin-top: 12px;
+    }
+    .compliance-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fde68a;
+      font-size: 0.84rem;
+    }
+    .feature-list {
+      margin: 14px 0;
+      padding-left: 18px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+    .feature-list li { margin-bottom: 8px; }
+    .toast {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--emerald);
+      color: #a7f3d0;
+      font-size: 0.88rem;
+    }
+</style>
+  <script src="domain-router-and-analytics.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <span>ArchiveValue</span>
+        <span class="badge">Tholen AI Data Desk</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link ">All Verticals Hub</a>
+        <a href="cad-bim-engineering.html" class="nav-link ">1. CAD / BIM / Survey</a>
+        <a href="startup-archives.html" class="nav-link ">2. Startups &amp; Dev Shops</a>
+        <a href="accounting-sops.html" class="nav-link active">3. Accounting &amp; Tax SOPs</a>
+      </nav>
+      <div>
+        <span class="badge-guarantee">Typical Qualified Payouts: $10,000–$250,000+ (Subject to Audit)</span>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <section class="hero">
+      <span class="badge">Vertical 3 Dedicated Micro-Site • Accounting, Tax Prep & Back-Office SOPs (RH Tax Services Archetype)</span>
+      <h1>Turn Your Accounting Firm’s SOPs, Blank Workpapers & Bookkeeping Workflows Into $10,000–$250,000+ in AI Licensing</h1>
+      <p>Constantine Solutions’ live AI Training RFP ($100K–$500K per partner, closing Dec 31, 2026), OpenAI Data Partnerships, and principal buyers pay high-margin licensing fees for internal accounting SOPs, multi-tab Excel reconciliation templates, and scrubbed corporate GL workflows—with ZERO IRS § 7216 individual tax return PII ever touched.</p>
+
+      <div class="guarantee-banner">
+        <div>
+          <strong style="color: #6ee7b7; font-size: 0.98rem;">Typical Qualified Archive Payouts Range from $10,000 to $250,000+ (Subject to Technical Audit):</strong>
+          <div style="font-size: 0.86rem; color: var(--muted); margin-top: 3px;">
+            Qualified engineering, code, and B2B archives typically license for <strong>$10,000 to $250,000+ across 3x–5x non-exclusive AI lab placements</strong> (70% to Owner / 30% Brokerage). All calculator figures are preliminary market estimates—submit a read-only metadata manifest for a free technical audit to verify eligibility and active lab demand.
+          </div>
+        </div>
+        <span class="badge-guarantee">$0 Upfront &bull; Free Eligibility Audit</span>
+      </div>
+    </section>
+
+    <div class="grid-main">
+      <div class="panel">
+        <h2>1. Configure Your Archive &amp; Calculate Payout</h2>
+        <p class="sub">Estimate your single-buyer license and 3x non-exclusive syndicate payout against live Q4 2026 AI buyer rate cards.</p>
+
+        <div class="field">
+          <label><span>Years of Historical Records / Operations</span><span id="yearsVal">8 Years</span></label>
+          <input type="range" id="years" min="1" max="40" value="8" oninput="recalc()" />
+        </div>
+
+        <div class="field">
+          <label><span>Peak Team Size / Staff / Contributors</span><span id="staffVal">15 FTEs</span></label>
+          <input type="range" id="staff" min="1" max="250" value="15" oninput="recalc()" />
+        </div>
+
+        <div class="field">
+          <label><span>Estimated Archive / Template / Project Volume (GB)</span><span id="volVal">250 GB</span></label>
+          <input type="range" id="vol" min="5" max="10000" step="25" value="250" oninput="recalc()" />
+        </div>
+
+        <div class="field">
+          <label>Select Included Workflows &amp; File Types</label>
+          <div class="checkbox-grid">
+            <label class="check-item"><input type="checkbox" class="mod-chk" value="sops" checked onchange="recalc()" /> Written Firm SOPs & Review Checklists</label>
+<label class="check-item"><input type="checkbox" class="mod-chk" value="excel" checked onchange="recalc()" /> Multi-Tab Excel Workpaper Templates & Macros</label>
+<label class="check-item"><input type="checkbox" class="mod-chk" value="gl" checked onchange="recalc()" /> Scrubbed Corporate GL / Month-End Reconciliations</label>
+<label class="check-item"><input type="checkbox" class="mod-chk" value="trajectories" checked onchange="recalc()" /> Opt-In Screen Recordings of Bookkeeping Workflows</label>
+<label class="check-item"><input type="checkbox" class="mod-chk" value="tickets"  onchange="recalc()" /> De-Identified Client Q&A / Advisory Email Threads</label>
+<label class="check-item"><input type="checkbox" class="mod-chk" value="qbo"  onchange="recalc()" /> Chart-of-Accounts & Categorization Rule Schemas</label>
+          </div>
+        </div>
+
+        <div class="compliance-note">
+          <strong>100% IRS § 7216 &amp; Client Confidentiality Safe Harbor:</strong> We NEVER touch, scan, or license individual 1040 tax returns or unconsented taxpayer PII. AI labs strictly buy: (1) your internal written SOPs &amp; review checklists, (2) blank or synthetic multi-tab Excel workpaper formulas, (3) de-identified corporate bookkeeping/GL reconciliation logic, and (4) opt-in screen recordings of accountants solving mock/scrubbed Month-End Close tasks.
+        </div>
+
+        <div class="code-box">
+          <strong style="color: var(--accent);"># Local Read-Only Manifest Verification (Zero PII Exported)</strong><br/>
+          $ python3 inventory-scanner.py /path/to/archive --output manifest.json<br/>
+          <span style="color: var(--muted);"># Uses only Python 3 standard library. Exports file counts &amp; sizes by extension—zero file contents leave your computer.</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="result-box">
+          <div class="result-label" id="catBadge">Catalog Card: MK-FIN-1042A</div>
+          <div class="result-number" id="netPayout">$115,000 – $285,000</div>
+          <div class="result-sub">Estimated Net Payout to You (at 72.5% Seller Share across 3x Non-Exclusive Buyers)</div>
+
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span style="color: var(--muted);">Typical Qualified Benchmark Range:</span>
+              <strong style="color: #6ee7b7;">$10,000–$250,000+ (Subject to Technical Audit)</strong>
+            </div>
+            <div class="breakdown-row">
+              <span style="color: var(--muted);">Single-Buyer License Benchmark (1x):</span>
+              <strong id="singleVal">$55,000 – $130,000</strong>
+            </div>
+            <div class="breakdown-row">
+              <span style="color: var(--muted);">3x Non-Exclusive Gross Syndicate Value:</span>
+              <strong id="multiVal">$165,000 – $390,000</strong>
+            </div>
+            <div class="breakdown-row">
+              <span style="color: var(--muted);">Upfront Cost to You:</span>
+              <strong style="color: var(--emerald);">$0 (100% Contingency)</strong>
+            </div>
+            <div class="breakdown-row">
+              <span style="color: var(--muted);">Matched Buyers &amp; Active RFPs:</span>
+              <strong style="color: var(--accent); text-align: right;">Constantine Solutions RFP ($100K-$500K, Dec 31), OpenAI, HUMXN Research Labs, Mercor, Mode</strong>
+            </div>
+          </div>
+        </div>
+
+        <h2>2. Request Your Preliminary Valuation & Eligibility Audit</h2>
+        <p class="sub">Complete below to email <code>data-desk@mail.grokbot.com</code> and receive the 1-Page Rights &amp; Contingency Option Agreement + local scanner script.</p>
+
+        <div class="field">
+          <label for="leadName">Your Name &amp; Role</label>
+          <input type="text" id="leadName" placeholder="e.g., Ross / Managing Principal, RH Tax Services" />
+        </div>
+        <div class="field">
+          <label for="leadEmail">Work Email</label>
+          <input type="email" id="leadEmail" placeholder="name@company.com" />
+        </div>
+        <div class="field">
+          <label for="leadNotes">Brief Note on Your Archive / Workflows</label>
+          <input type="text" id="leadNotes" placeholder="e.g., Internal tax/bookkeeping SOPs, Excel reconciliation templates & corporate GL workflows (Zero 7216 PII)" />
+        </div>
+
+        <button class="btn" type="button" onclick="submitLead()">Get Preliminary Archive Valuation &amp; Eligibility Audit</button>
+        <a id="mailtoLink" class="btn-secondary" href="mailto:data-desk@mail.grokbot.com">Or Email data-desk@mail.grokbot.com Directly &rarr;</a>
+        <div class="toast" id="leadToast"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const BASE_LOW = 42000;
+    const BASE_HIGH = 115000;
+    const PREFIX = "MK-FIN";
+
+    function recalc() {
+      const years = parseInt(document.getElementById('years').value, 10);
+      const staff = parseInt(document.getElementById('staff').value, 10);
+      const vol = parseInt(document.getElementById('vol').value, 10);
+      const checks = Array.from(document.querySelectorAll('.mod-chk:checked')).map(c => c.value);
+
+      document.getElementById('yearsVal').textContent = years + (years === 1 ? ' Year' : ' Years');
+      document.getElementById('staffVal').textContent = staff + ' FTEs';
+      document.getElementById('volVal').textContent = vol >= 1000
+        ? (vol / 1000).toFixed(1) + ' TB (' + vol.toLocaleString() + ' GB)'
+        : vol.toLocaleString() + ' GB';
+
+      const yearFactor = 1 + Math.min(2.0, years * 0.06);
+      const staffFactor = 1 + Math.min(1.6, staff * 0.012);
+      const volFactor = 1 + Math.min(1.4, vol / 2500);
+      const modFactor = 1 + (checks.length * 0.14);
+
+      const singleLow = Math.max(15000, Math.round((BASE_LOW * yearFactor * staffFactor * volFactor * modFactor) / 5000) * 5000);
+      const singleHigh = Math.max(35000, Math.round((BASE_HIGH * yearFactor * staffFactor * volFactor * modFactor) / 5000) * 5000);
+
+      const multiLow = singleLow * 3;
+      const multiHigh = singleHigh * 3;
+
+      const netLow = Math.max(10000, Math.round((multiLow * 0.725) / 5000) * 5000);
+      const netHigh = Math.max(25000, Math.round((multiHigh * 0.725) / 5000) * 5000);
+
+      const cardId = PREFIX + '-' + (1000 + years * 23 + staff * 9);
+      document.getElementById('catBadge').textContent = 'Catalog Card: ' + cardId;
+      document.getElementById('singleVal').textContent = '$' + singleLow.toLocaleString() + ' – $' + singleHigh.toLocaleString();
+      document.getElementById('multiVal').textContent = '$' + multiLow.toLocaleString() + ' – $' + multiHigh.toLocaleString();
+      document.getElementById('netPayout').textContent = '$' + netLow.toLocaleString() + ' – $' + netHigh.toLocaleString();
+
+      const subj = encodeURIComponent('Request Preliminary Archive Valuation & Audit — ' + cardId);
+      const body = encodeURIComponent('Hi Dak / Ben,
+
+Please review our archive details for a non-binding preliminary valuation and send inventory-scanner.py for:
+- Card: ' + cardId + '
+- Estimated 3x Net Range: $' + netLow.toLocaleString() + ' - $' + netHigh.toLocaleString() + '
+- Years: ' + years + ' | Team Size: ' + staff + ' FTEs
+');
+      document.getElementById('mailtoLink').href = 'mailto:data-desk@mail.grokbot.com?subject=' + subj + '&body=' + body;
+    }
+
+    function submitLead() {
+      const name = document.getElementById('leadName').value.trim() || 'Partner';
+      const email = document.getElementById('leadEmail').value.trim() || 'provided email';
+      const notes = document.getElementById('leadNotes').value.trim() || 'Qualified Archive';
+      const payout = document.getElementById('netPayout').textContent;
+      const cardId = document.getElementById('catBadge').textContent;
+      const toast = document.getElementById('leadToast');
+      toast.style.display = 'block';
+      toast.innerHTML = '<strong>Preliminary Valuation & Audit Request Prepared for ' + name + ' (' + email + '):</strong> Opening email confirmation to <code>data-desk@mail.grokbot.com</code>...';
+      const subj = encodeURIComponent('Preliminary Valuation & Audit Request (' + cardId + ') — ' + name);
+      const body = encodeURIComponent('Name: ' + name + '
+Email: ' + email + '
+' + cardId + '
+Estimated 3x Net Payout: ' + payout + '
+Notes: ' + notes + '
+
+Please send the 1-Page Rights & Contingency Option Agreement (Typical Qualified Payouts: $10,000–$250,000+ (Subject to Audit)).');
+      window.location.href = 'mailto:data-desk@mail.grokbot.com?subject=' + subj + '&body=' + body;
+    }
+
+    recalc();
+  </script>
+</body>
+</html>
