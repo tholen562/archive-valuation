@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Turn Your Accounting Firm’s SOPs, Blank Workpapers & Bookkeeping  | ArchiveValue</title>
+  <title>Turn Accounting SOPs & Bookkeeping Workflows Into $10,000–$250,000+ | ArchiveValue</title>
   <style>
     :root {
       --bg: #0b0f17;
@@ -317,8 +317,48 @@
       color: #a7f3d0;
       font-size: 0.88rem;
     }
-</style>
+
+    /* Above-the-fold CTA */
+    .container.nav { padding-left: 24px; padding-right: 24px; }
+    .header-cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .btn.btn-cta-header {
+      width: auto;
+      padding: 9px 16px;
+      font-size: 0.86rem;
+      white-space: nowrap;
+      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.55), 0 6px 18px rgba(16, 185, 129, 0.25);
+    }
+    .hero-cta { margin: -4px auto 30px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .btn.btn-cta-hero {
+      width: auto;
+      min-width: 300px;
+      padding: 16px 32px;
+      font-size: 1.06rem;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+    }
+    .btn.btn-cta-header:focus-visible, .btn.btn-cta-hero:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .hero-cta-note { font-size: 0.8rem; color: var(--muted); }
+    #get-valuation { scroll-margin-top: 110px; }
+    .nav-links { gap: 4px; }
+    .nav-link { padding: 6px 8px; font-size: 0.8rem; }
+    .btn.btn-cta-header { padding: 8px 14px; font-size: 0.82rem; }
+    @media (min-width: 641px) and (max-width: 1140px) {
+      .brand .badge { display: none; }
+    }
+    @media (max-width: 640px) {
+      .nav { gap: 10px; }
+      .header-cta { order: 2; width: 100%; }
+      .container.nav { padding-left: 16px; padding-right: 16px; }
+      .nav-links { order: 3; width: 100%; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-link { white-space: nowrap; }
+      .btn.btn-cta-header { width: 100%; padding: 10px 14px; }
+      .btn.btn-cta-hero { width: 100%; min-width: 0; }
+      #get-valuation { scroll-margin-top: 150px; }
+    }
+  </style>
   <script src="domain-router-and-analytics.js"></script>
+  <script data-goatcounter="https://archivevalue.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
   <header>
@@ -333,16 +373,21 @@
         <a href="startup-archives.html" class="nav-link ">2. Startups &amp; Dev Shops</a>
         <a href="accounting-sops.html" class="nav-link active">3. Accounting &amp; Tax SOPs</a>
       </nav>
-      <div>
-        <span class="badge-guarantee">Typical Qualified Payouts: $10,000–$250,000+ (Subject to Audit)</span>
+      <div class="header-cta">
+        <a href="#get-valuation" class="btn btn-cta-header js-cta" data-cta-event="cta-top-header-click">Get My Free Archive Valuation</a>
       </div>
     </div>
   </header>
   <div class="container">
     <section class="hero">
       <span class="badge">Vertical 3 Dedicated Micro-Site • Accounting, Tax Prep & Back-Office SOPs (RH Tax Services Archetype)</span>
-      <h1>Turn Your Accounting Firm’s SOPs, Blank Workpapers & Bookkeeping Workflows Into $10,000–$250,000+ in AI Licensing</h1>
+      <h1>Turn Your Accounting Firm’s SOPs, Blank Workpapers & Bookkeeping Workflows Into $10,000–$250,000+</h1>
       <p>Constantine Solutions’ live AI Training RFP ($100K–$500K per partner, closing Dec 31, 2026), OpenAI Data Partnerships, and principal buyers pay high-margin licensing fees for internal accounting SOPs, multi-tab Excel reconciliation templates, and scrubbed corporate GL workflows—with ZERO IRS § 7216 individual tax return PII ever touched.</p>
+
+      <div class="hero-cta">
+        <a href="#get-valuation" class="btn btn-cta-hero js-cta" data-cta-event="cta-hero-click">Get My Free Archive Valuation &rarr;</a>
+        <span class="hero-cta-note">Free, non-binding preliminary estimate &bull; No upfront cost</span>
+      </div>
 
       <div class="guarantee-banner">
         <div>
@@ -428,7 +473,7 @@
           </div>
         </div>
 
-        <h2>2. Request Your Preliminary Valuation & Eligibility Audit</h2>
+        <h2 id="get-valuation">2. Request Your Preliminary Valuation & Eligibility Audit</h2>
         <p class="sub">Complete below to email <code>data-desk@mail.grokbot.com</code> and receive the 1-Page Rights &amp; Contingency Option Agreement + local scanner script.</p>
 
         <div class="field">
@@ -489,13 +534,7 @@
       document.getElementById('netPayout').textContent = '$' + netLow.toLocaleString() + ' – $' + netHigh.toLocaleString();
 
       const subj = encodeURIComponent('Request Preliminary Archive Valuation & Audit — ' + cardId);
-      const body = encodeURIComponent('Hi Dak / Ben,
-
-Please review our archive details for a non-binding preliminary valuation and send inventory-scanner.py for:
-- Card: ' + cardId + '
-- Estimated 3x Net Range: $' + netLow.toLocaleString() + ' - $' + netHigh.toLocaleString() + '
-- Years: ' + years + ' | Team Size: ' + staff + ' FTEs
-');
+      const body = encodeURIComponent('Hi Dak / Ben,\n\nPlease review our archive details for a non-binding preliminary valuation and send inventory-scanner.py for:\n- Card: ' + cardId + '\n- Estimated 3x Net Range: $' + netLow.toLocaleString() + ' - $' + netHigh.toLocaleString() + '\n- Years: ' + years + ' | Team Size: ' + staff + ' FTEs\n');
       document.getElementById('mailtoLink').href = 'mailto:data-desk@mail.grokbot.com?subject=' + subj + '&body=' + body;
     }
 
@@ -509,13 +548,7 @@ Please review our archive details for a non-binding preliminary valuation and se
       toast.style.display = 'block';
       toast.innerHTML = '<strong>Preliminary Valuation & Audit Request Prepared for ' + name + ' (' + email + '):</strong> Opening email confirmation to <code>data-desk@mail.grokbot.com</code>...';
       const subj = encodeURIComponent('Preliminary Valuation & Audit Request (' + cardId + ') — ' + name);
-      const body = encodeURIComponent('Name: ' + name + '
-Email: ' + email + '
-' + cardId + '
-Estimated 3x Net Payout: ' + payout + '
-Notes: ' + notes + '
-
-Please send the 1-Page Rights & Contingency Option Agreement (Typical Qualified Payouts: $10,000–$250,000+ (Subject to Audit)).');
+      const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n' + cardId + '\nEstimated 3x Net Payout: ' + payout + '\nNotes: ' + notes + '\n\nPlease send the 1-Page Rights & Contingency Option Agreement (Typical Qualified Payouts: $10,000–$250,000+ (Subject to Audit)).');
       window.location.href = 'mailto:data-desk@mail.grokbot.com?subject=' + subj + '&body=' + body;
     }
 

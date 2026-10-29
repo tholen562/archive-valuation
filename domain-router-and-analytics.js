@@ -62,3 +62,78 @@
     }
   });
 })();
+
+/**
+ * Above-the-fold CTA scroll + GoatCounter custom event tracking.
+ * GoatCounter (archivevalue) pageviews come from the count.js tag in each page <head>;
+ * count.js sends location.search with every hit, so utm_source / ref are kept as the referrer.
+ * Events below are queued and retried until window.goatcounter.count is available.
+ */
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var SOURCE = ((params.get("utm_source") || params.get("ref") || "").replace(/^www\./, "").toLowerCase()) || "direct";
+  var PAGE = (window.location.pathname.split("/").pop() || "index.html").replace(/\.html?$/i, "") || "index";
+
+  function gcEvent(name, extra) {
+    var title = name + " | " + SOURCE + " | " + PAGE + (extra ? " | " + extra : "");
+    var tries = 0;
+    (function attempt() {
+      var gc = window.goatcounter;
+      if (gc && typeof gc.count === "function") {
+        try { gc.count({ path: name, title: title, event: true }); } catch (e) { /* never break the page */ }
+      } else if (tries++ < 40) {
+        setTimeout(attempt, 250); // retry for up to ~10s while count.js loads
+      }
+    })();
+  }
+  window.trackArchiveEvent = gcEvent;
+
+  function scrollToForm() {
+    var target = document.getElementById("get-valuation");
+    if (!target) return;
+    var header = document.querySelector("header");
+    var offset = (header ? header.getBoundingClientRect().height : 0) + 16;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    try { window.scrollTo({ top: top, behavior: "smooth" }); } catch (e) { window.scrollTo(0, top); }
+    var input = document.getElementById("leadName");
+    if (input) {
+      setTimeout(function () {
+        try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); }
+      }, 600);
+    }
+  }
+
+  var calcFired = false;
+  function calcInteraction(el) {
+    if (calcFired || !el) return;
+    var isCalc = el.matches && (el.matches('input[type="range"], input.mod-chk, select') || el.closest(".mode-btn"));
+    if (!isCalc) return;
+    calcFired = true;
+    gcEvent("calculator-interaction", el.id || el.className || el.tagName.toLowerCase());
+  }
+
+  document.addEventListener("click", function (ev) {
+    var t = ev.target;
+    if (!t || !t.closest) return;
+    var cta = t.closest(".js-cta");
+    if (cta) {
+      ev.preventDefault();
+      gcEvent(cta.getAttribute("data-cta-event") || "cta-click");
+      scrollToForm();
+      return;
+    }
+    var modeBtn = t.closest(".mode-btn");
+    if (modeBtn) {
+      var mode = (modeBtn.id || "").replace(/^btn-/, "") || "unknown";
+      gcEvent("vertical-switch-" + mode);
+      calcInteraction(modeBtn);
+      return;
+    }
+    if (t.closest("#mailtoLink")) { gcEvent("email-link-click"); return; }
+    var btn = t.closest("button.btn");
+    if (btn && /submitLead/.test(btn.getAttribute("onclick") || "")) { gcEvent("lead-form-submit"); }
+  }, true);
+
+  document.addEventListener("input", function (ev) { calcInteraction(ev.target); }, true);
+  document.addEventListener("change", function (ev) { calcInteraction(ev.target); }, true);
+})();
