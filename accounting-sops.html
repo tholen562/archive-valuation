@@ -446,7 +446,7 @@
       <div class="panel">
         <div class="result-box">
           <div class="result-label" id="catBadge">Catalog Card: MK-FIN-1042A</div>
-          <div class="result-number" id="netPayout">$115,000 – $285,000</div>
+          <div class="result-number" id="netPayout">$60,000 – $140,000</div>
           <div class="result-sub">Estimated Net Payout to You (at 72.5% Seller Share across 3x Non-Exclusive Buyers)</div>
 
           <div class="breakdown">
@@ -456,11 +456,11 @@
             </div>
             <div class="breakdown-row">
               <span style="color: var(--muted);">Single-Buyer License Benchmark (1x):</span>
-              <strong id="singleVal">$55,000 – $130,000</strong>
+              <strong id="singleVal">$28,000 – $64,000</strong>
             </div>
             <div class="breakdown-row">
               <span style="color: var(--muted);">3x Non-Exclusive Gross Syndicate Value:</span>
-              <strong id="multiVal">$165,000 – $390,000</strong>
+              <strong id="multiVal">$84,000 – $192,000</strong>
             </div>
             <div class="breakdown-row">
               <span style="color: var(--muted);">Upfront Cost to You:</span>
@@ -497,8 +497,8 @@
   </div>
 
   <script>
-    const BASE_LOW = 42000;
-    const BASE_HIGH = 115000;
+    const BASE_LOW = 21400;
+    const BASE_HIGH = 50000;
     const PREFIX = "MK-FIN";
 
     function recalc() {
@@ -513,28 +513,35 @@
         ? (vol / 1000).toFixed(1) + ' TB (' + vol.toLocaleString() + ' GB)'
         : vol.toLocaleString() + ' GB';
 
-      const yearFactor = 1 + Math.min(2.0, years * 0.06);
-      const staffFactor = 1 + Math.min(1.6, staff * 0.012);
-      const volFactor = 1 + Math.min(1.4, vol / 2500);
-      const modFactor = 1 + (checks.length * 0.14);
+      // Non-binding preliminary estimate model (rescaled 2026-10-30): calibrated so typical archives land
+      // ~$50K–$150K, small archives ~$10K–$25K, and the display tops out at "$250,000+" (Subject to Technical Audit).
+      const CAP = 250000;
+      const fmt = v => v >= CAP ? '$250,000+' : '$' + v.toLocaleString();
+      const rangeText = (lo, hi) => lo >= CAP ? fmt(CAP) : fmt(lo) + ' – ' + fmt(hi);
+      // Saturating factors: each input scales the estimate between a floor and a ceiling (no runaway growth).
+      const sat = (x, lo, hi, x0) => lo + (hi - lo) * (1 - Math.exp(-x / x0));
+      const yearFactor = sat(years, 0.55, 1.45, 8);
+      const staffFactor = sat(staff, 0.6, 1.35, 15);
+      const volFactor = sat(vol, 0.65, 1.35, 250);
+      const modFactor = 0.5 + (checks.length * 0.12);
 
-      const singleLow = Math.max(15000, Math.round((BASE_LOW * yearFactor * staffFactor * volFactor * modFactor) / 5000) * 5000);
-      const singleHigh = Math.max(35000, Math.round((BASE_HIGH * yearFactor * staffFactor * volFactor * modFactor) / 5000) * 5000);
+      const singleLow = Math.max(5000, Math.round((BASE_LOW * yearFactor * staffFactor * volFactor * modFactor) / 1000) * 1000);
+      const singleHigh = Math.max(10000, Math.round((BASE_HIGH * yearFactor * staffFactor * volFactor * modFactor) / 1000) * 1000);
 
       const multiLow = singleLow * 3;
       const multiHigh = singleHigh * 3;
 
-      const netLow = Math.max(10000, Math.round((multiLow * 0.725) / 5000) * 5000);
-      const netHigh = Math.max(25000, Math.round((multiHigh * 0.725) / 5000) * 5000);
+      const netLow = Math.min(CAP, Math.max(10000, Math.round((multiLow * 0.725) / 5000) * 5000));
+      const netHigh = Math.min(CAP, Math.max(25000, Math.round((multiHigh * 0.725) / 5000) * 5000));
 
       const cardId = PREFIX + '-' + (1000 + years * 23 + staff * 9);
       document.getElementById('catBadge').textContent = 'Catalog Card: ' + cardId;
-      document.getElementById('singleVal').textContent = '$' + singleLow.toLocaleString() + ' – $' + singleHigh.toLocaleString();
-      document.getElementById('multiVal').textContent = '$' + multiLow.toLocaleString() + ' – $' + multiHigh.toLocaleString();
-      document.getElementById('netPayout').textContent = '$' + netLow.toLocaleString() + ' – $' + netHigh.toLocaleString();
+      document.getElementById('singleVal').textContent = rangeText(singleLow, singleHigh);
+      document.getElementById('multiVal').textContent = rangeText(multiLow, multiHigh);
+      document.getElementById('netPayout').textContent = rangeText(netLow, netHigh);
 
       const subj = encodeURIComponent('Request Preliminary Archive Valuation & Audit — ' + cardId);
-      const body = encodeURIComponent('Hi Dak / Ben,\n\nPlease review our archive details for a non-binding preliminary valuation and send inventory-scanner.py for:\n- Card: ' + cardId + '\n- Estimated 3x Net Range: $' + netLow.toLocaleString() + ' - $' + netHigh.toLocaleString() + '\n- Years: ' + years + ' | Team Size: ' + staff + ' FTEs\n');
+      const body = encodeURIComponent('Hi Dak / Ben,\n\nPlease review our archive details for a non-binding preliminary valuation and send inventory-scanner.py for:\n- Card: ' + cardId + '\n- Estimated 3x Net Range: ' + rangeText(netLow, netHigh) + '\n- Years: ' + years + ' | Team Size: ' + staff + ' FTEs\n');
       document.getElementById('mailtoLink').href = 'mailto:data-desk@mail.grokbot.com?subject=' + subj + '&body=' + body;
     }
 
