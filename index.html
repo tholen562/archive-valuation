@@ -513,8 +513,8 @@
       <div class="panel">
         <div class="result-box">
           <div class="result-label" id="catBadge">Catalog Card: MK-CAD-1194A</div>
-          <div class="result-number" id="netPayout">$60,000 – $140,000</div>
-          <div class="result-sub">Estimated Net Payout to You (at 72.5% Seller Share across 3x Non-Exclusive Lab Licenses)</div>
+          <div class="result-number" id="netPayout">$60,000 – $135,000</div>
+          <div class="result-sub">Estimated Net Payout to You (at 70% Seller Share across 3x Non-Exclusive Lab Licenses)</div>
 
           <div class="breakdown">
             <div class="breakdown-row">
@@ -647,8 +647,8 @@
       const multiLow = singleLow * 3;
       const multiHigh = singleHigh * 3;
 
-      const netLow = Math.min(CAP, Math.max(10000, Math.round((multiLow * 0.725) / 5000) * 5000));
-      const netHigh = Math.min(CAP, Math.max(25000, Math.round((multiHigh * 0.725) / 5000) * 5000));
+      const netLow = Math.min(CAP, Math.max(10000, Math.round((multiLow * 0.70) / 5000) * 5000));
+      const netHigh = Math.min(CAP, Math.max(25000, Math.round((multiHigh * 0.70) / 5000) * 5000));
 
       const cardId = cfg.prefix + '-' + (1000 + years * 19 + staff * 7);
       document.getElementById('catBadge').textContent =
@@ -673,7 +673,7 @@
       const toast = document.getElementById('leadToast');
       toast.style.display = 'block';
       toast.innerHTML = '<strong>Preliminary Valuation & Audit Request Prepared for ' + name + ' (' + email + ' — ' + mode + '):</strong> ' +
-        'Routed to <strong>@Dak</strong> for 72.5/27.5 non-exclusive AI lab syndication' +
+        'Routed to <strong>@Dak</strong> for 70/30 non-exclusive AI lab syndication' +
         (status === 'ma_active' ? ' and queued for <strong>@Chuck</strong> (M&amp;A Deal Watch).' : '.') +
         ' Opening email confirmation to <code>data-desk@mail.grokbot.com</code>...';
       const subj = encodeURIComponent('Preliminary Valuation & Audit Request [' + mode + '] — ' + name);
