@@ -446,8 +446,8 @@
       <div class="panel">
         <div class="result-box">
           <div class="result-label" id="catBadge">Catalog Card: MK-FIN-1042A</div>
-          <div class="result-number" id="netPayout">$60,000 – $140,000</div>
-          <div class="result-sub">Estimated Net Payout to You (at 72.5% Seller Share across 3x Non-Exclusive Buyers)</div>
+          <div class="result-number" id="netPayout">$60,000 – $135,000</div>
+          <div class="result-sub">Estimated Net Payout to You (at 70% Seller Share across 3x Non-Exclusive Buyers)</div>
 
           <div class="breakdown">
             <div class="breakdown-row">
@@ -531,8 +531,8 @@
       const multiLow = singleLow * 3;
       const multiHigh = singleHigh * 3;
 
-      const netLow = Math.min(CAP, Math.max(10000, Math.round((multiLow * 0.725) / 5000) * 5000));
-      const netHigh = Math.min(CAP, Math.max(25000, Math.round((multiHigh * 0.725) / 5000) * 5000));
+      const netLow = Math.min(CAP, Math.max(10000, Math.round((multiLow * 0.70) / 5000) * 5000));
+      const netHigh = Math.min(CAP, Math.max(25000, Math.round((multiHigh * 0.70) / 5000) * 5000));
 
       const cardId = PREFIX + '-' + (1000 + years * 23 + staff * 9);
       document.getElementById('catBadge').textContent = 'Catalog Card: ' + cardId;
