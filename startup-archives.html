@@ -356,6 +356,46 @@
       .btn.btn-cta-hero { width: 100%; min-width: 0; }
       #get-valuation { scroll-margin-top: 150px; }
     }
+    /* Compact follow-up ask under the calculator estimate */
+    .result-ask {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .result-ask > p {
+      font-size: 0.92rem;
+      color: #e2e8f0;
+      margin: 0 0 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .result-ask-fields {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto;
+      gap: 8px;
+      align-items: end;
+    }
+    .result-ask .field { margin-bottom: 0; }
+    .result-ask .field label {
+      font-size: 0.75rem;
+      margin-bottom: 4px;
+    }
+    .result-ask .field label .opt {
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .result-ask .btn {
+      width: auto;
+      padding: 10px 16px;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+    @media (max-width: 640px) {
+      .result-ask-fields { grid-template-columns: 1fr; }
+      .result-ask .btn { width: 100%; }
+    }
   </style>
   <script src="domain-router-and-analytics.js"></script>
   <script data-goatcounter="https://archivevalue.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -382,7 +422,7 @@
     <section class="hero">
       <span class="badge">Vertical 2 Dedicated Micro-Site • Wound-Down Startups, B2B SaaS, Micro-PE & Dev Shops</span>
       <h1>Turn Dormant Startup & Dev Shop Archives (GitHub + Slack + Jira) Into $10,000–$250,000+</h1>
-      <p>Whether your startup is winding down via SimpleClosure/Sunset, listed on Quiet Light/Acquire.com, or operating as a software agency, principal buyers (Handshake AI, micro1, Turing Lazarus, Mode, Mercor, OpenAI) pay six figures for linked Git commit histories, PRs, tickets, and Slack threads.</p>
+      <p>Whether your startup is winding down via SimpleClosure/Sunset, listed on Quiet Light/Acquire.com, or operating as a software agency, AI labs are actively licensing archives like yours — linked Git commit histories, PRs, tickets, and Slack threads.</p>
 
       <div class="hero-cta">
         <a href="#get-valuation" class="btn btn-cta-hero js-cta" data-cta-event="cta-hero-click">Get My Free Archive Valuation &rarr;</a>
@@ -471,6 +511,24 @@
               <strong style="color: var(--accent); text-align: right;">Handshake AI ($100K-$4M), micro1 Shut-Down Track, Turing Lazarus, Anthropic HDO, UT Austin Labs</strong>
             </div>
           </div>
+
+          <div class="result-ask" id="resultAsk">
+            <p>Want a real number? Send us a quick description of your archive and we'll take a look.</p>
+            <form class="result-ask-form" id="resultAskForm" onsubmit="return submitResultAsk(event)">
+              <div class="result-ask-fields">
+                <div class="field">
+                  <label for="resultEmail">Email *</label>
+                  <input type="email" id="resultEmail" name="email" required placeholder="you@company.com" autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="resultDesc">Archive description <span class="opt">(optional)</span></label>
+                  <input type="text" id="resultDesc" name="description" maxlength="200" placeholder="One line about your archive" />
+                </div>
+                <button class="btn" type="submit">Send a description</button>
+              </div>
+            </form>
+            <div class="toast" id="resultAskToast"></div>
+          </div>
         </div>
 
         <h2 id="get-valuation">2. Request Your Preliminary Valuation & Eligibility Audit</h2>
@@ -557,6 +615,63 @@
       const subj = encodeURIComponent('Preliminary Valuation & Audit Request (' + cardId + ') — ' + name);
       const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n' + cardId + '\nEstimated 3x Net Payout: ' + payout + '\nNotes: ' + notes + '\n\nPlease send the 1-Page Rights & Contingency Option Agreement (Typical Qualified Payouts: $10,000–$250,000+ (Subject to Audit)).');
       window.location.href = 'mailto:data-desk@mail.grokbot.com?subject=' + subj + '&body=' + body;
+    }
+
+    function sourceDomain() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var fromQuery = (params.get('utm_source') || params.get('ref') || '').replace(/^www\./, '').toLowerCase();
+        if (fromQuery) return fromQuery;
+        if (window.__ARCHIVE_ATTRIBUTION__ && window.__ARCHIVE_ATTRIBUTION__.source_domain) {
+          return window.__ARCHIVE_ATTRIBUTION__.source_domain;
+        }
+      } catch (e) {}
+      return 'direct';
+    }
+
+    function submitResultAsk(ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      var emailEl = document.getElementById('resultEmail');
+      var email = (emailEl && emailEl.value || '').trim();
+      var toast = document.getElementById('resultAskToast');
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!valid) {
+        if (toast) {
+          toast.style.display = 'block';
+          toast.style.background = 'rgba(245, 158, 11, 0.12)';
+          toast.style.borderColor = 'rgba(245, 158, 11, 0.5)';
+          toast.style.color = '#fde68a';
+          toast.textContent = 'Please enter a valid email so we can follow up.';
+        }
+        if (emailEl) emailEl.focus();
+        return false;
+      }
+      var desc = ((document.getElementById('resultDesc') || {}).value || '').trim();
+      var estimate = ((document.getElementById('netPayout') || {}).textContent || 'n/a').trim();
+      var source = sourceDomain();
+      var page = (window.location.pathname.split('/').pop() || 'index.html');
+      if (typeof window.trackArchiveEvent === 'function') {
+        window.trackArchiveEvent('result-form-submit');
+      }
+      if (toast) {
+        toast.style.display = 'block';
+        toast.style.background = '';
+        toast.style.borderColor = '';
+        toast.style.color = '';
+        toast.innerHTML = "Thanks — we'll take a look. Opening an email to <code>data-desk@mail.grokbot.com</code> so you can send it.";
+      }
+      var form = document.getElementById('resultAskForm');
+      if (form) form.style.display = 'none';
+      var subj = encodeURIComponent('Archive description — request for a look');
+      var body = encodeURIComponent(
+        'Email: ' + email + '\n' +
+        'Archive description: ' + (desc || '(none provided)') + '\n' +
+        'Calculator estimate shown: ' + estimate + '\n' +
+        'Source domain (utm_source): ' + source + '\n' +
+        'Page: ' + page + '\n'
+      );
+      window.location.href = 'mailto:data-desk@mail.grokbot.com?subject=' + subj + '&body=' + body;
+      return false;
     }
 
     recalc();
